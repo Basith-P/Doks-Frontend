@@ -33,6 +33,8 @@ class _MyAppState extends ConsumerState<MyApp> {
 
     return MaterialApp.router(
       title: 'Doks',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(useMaterial3: true),
       scaffoldMessengerKey: scaffoldMessengerKey,
       routerDelegate: RoutemasterDelegate(
         routesBuilder: (_) => user != null && user.token != null
@@ -40,13 +42,6 @@ class _MyAppState extends ConsumerState<MyApp> {
             : loggedOutRoutes,
       ),
       routeInformationParser: const RoutemasterParser(),
-      // home: ref.watch(userAuthStateProvider).when(
-      //       data: (user) => user != null ? const HomePage() : const LoginPage(),
-      //       error: (e, st) => const LoginPage(),
-      //       loading: () => const Scaffold(
-      //         body: Center(child: CircularProgressIndicator()),
-      //       ),
-      //     ),
     );
   }
 }

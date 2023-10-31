@@ -86,4 +86,9 @@ class AuthRepository {
     }
     return null;
   }
+
+  void signOut() async {
+    await _googleSignIn.signOut();
+    await _localStorageRepository.deleteToken();
+  }
 }

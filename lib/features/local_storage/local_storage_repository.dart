@@ -11,4 +11,9 @@ class LocalStorageRepository {
     final sharedPrefs = await SharedPreferences.getInstance();
     return sharedPrefs.getString(Strings.xAuthToken);
   }
+
+  Future<void> deleteToken() async {
+    final sharedPrefs = await SharedPreferences.getInstance();
+    sharedPrefs.remove(Strings.xAuthToken);
+  }
 }
