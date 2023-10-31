@@ -31,8 +31,8 @@ class AuthRepository {
       // final googleKey = await account.authentication;
       final user = User(
         email: account.email,
-        name: account.displayName!,
-        profilePic: account.photoUrl!,
+        name: account.displayName ?? account.email.split('@')[0],
+        profilePic: account.photoUrl ?? '',
       );
       final res = await _dio.post(Endpoints.register, data: user.toJson());
       debugPrint(res.data.toString());
