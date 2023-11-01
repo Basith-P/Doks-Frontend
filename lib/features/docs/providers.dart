@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final docsRepositoryProvider =
     Provider((ref) => DocsRepository(dio: ref.watch(dioProvider)));
 
-final getDocsProvider = FutureProvider<List<Document>>((ref) async {
+final getDocsProvider = FutureProvider<List<Doc>>((ref) async {
   final docs = await ref
       .read(docsRepositoryProvider)
       .getDocs(token: ref.read(userProvider)!.token!);

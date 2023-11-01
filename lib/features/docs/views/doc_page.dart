@@ -1,4 +1,7 @@
 import 'package:doks/config/theme/colors.dart';
+import 'package:doks/features/auth/providers.dart';
+import 'package:doks/features/docs/models/document.dart';
+import 'package:doks/features/docs/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,12 +26,25 @@ class _DocPageState extends ConsumerState<DocPage> {
     _quillController = QuillController.basic();
   }
 
+  void updateTitle() {
+    ref.read(docsRepositoryProvider).updateDoc(
+          token: ref.read(userProvider)!.token!,
+          doc: Doc(
+            id: widget.id,
+            title: _titleController.text,
+            createdAt: DateTime.now().millisecondsSinceEpoch,
+          ),
+        );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: TextField(
           controller: _titleController,
+          onEditingComplete: updateTitle,
+          onTapOutside: (_) => updateTitle(),
           decoration: const InputDecoration(
             border: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.transparent)),

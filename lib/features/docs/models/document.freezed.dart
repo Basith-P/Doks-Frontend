@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Document _$DocumentFromJson(Map<String, dynamic> json) {
-  return _Document.fromJson(json);
+Doc _$DocFromJson(Map<String, dynamic> json) {
+  return _Doc.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Document {
+mixin _$Doc {
   @JsonKey(name: '_id')
   String? get id => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
@@ -29,14 +29,13 @@ mixin _$Document {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $DocumentCopyWith<Document> get copyWith =>
-      throw _privateConstructorUsedError;
+  $DocCopyWith<Doc> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DocumentCopyWith<$Res> {
-  factory $DocumentCopyWith(Document value, $Res Function(Document) then) =
-      _$DocumentCopyWithImpl<$Res, Document>;
+abstract class $DocCopyWith<$Res> {
+  factory $DocCopyWith(Doc value, $Res Function(Doc) then) =
+      _$DocCopyWithImpl<$Res, Doc>;
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String? id,
@@ -47,9 +46,8 @@ abstract class $DocumentCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DocumentCopyWithImpl<$Res, $Val extends Document>
-    implements $DocumentCopyWith<$Res> {
-  _$DocumentCopyWithImpl(this._value, this._then);
+class _$DocCopyWithImpl<$Res, $Val extends Doc> implements $DocCopyWith<$Res> {
+  _$DocCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -91,11 +89,9 @@ class _$DocumentCopyWithImpl<$Res, $Val extends Document>
 }
 
 /// @nodoc
-abstract class _$$DocumentImplCopyWith<$Res>
-    implements $DocumentCopyWith<$Res> {
-  factory _$$DocumentImplCopyWith(
-          _$DocumentImpl value, $Res Function(_$DocumentImpl) then) =
-      __$$DocumentImplCopyWithImpl<$Res>;
+abstract class _$$DocImplCopyWith<$Res> implements $DocCopyWith<$Res> {
+  factory _$$DocImplCopyWith(_$DocImpl value, $Res Function(_$DocImpl) then) =
+      __$$DocImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -107,11 +103,9 @@ abstract class _$$DocumentImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$DocumentImplCopyWithImpl<$Res>
-    extends _$DocumentCopyWithImpl<$Res, _$DocumentImpl>
-    implements _$$DocumentImplCopyWith<$Res> {
-  __$$DocumentImplCopyWithImpl(
-      _$DocumentImpl _value, $Res Function(_$DocumentImpl) _then)
+class __$$DocImplCopyWithImpl<$Res> extends _$DocCopyWithImpl<$Res, _$DocImpl>
+    implements _$$DocImplCopyWith<$Res> {
+  __$$DocImplCopyWithImpl(_$DocImpl _value, $Res Function(_$DocImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -123,7 +117,7 @@ class __$$DocumentImplCopyWithImpl<$Res>
     Object? ownerId = freezed,
     Object? createdAt = null,
   }) {
-    return _then(_$DocumentImpl(
+    return _then(_$DocImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -150,8 +144,8 @@ class __$$DocumentImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$DocumentImpl implements _Document {
-  const _$DocumentImpl(
+class _$DocImpl implements _Doc {
+  const _$DocImpl(
       {@JsonKey(name: '_id') this.id,
       this.title = 'Untitled',
       final List<dynamic>? content,
@@ -159,8 +153,8 @@ class _$DocumentImpl implements _Document {
       required this.createdAt})
       : _content = content;
 
-  factory _$DocumentImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DocumentImplFromJson(json);
+  factory _$DocImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DocImplFromJson(json);
 
   @override
   @JsonKey(name: '_id')
@@ -185,14 +179,14 @@ class _$DocumentImpl implements _Document {
 
   @override
   String toString() {
-    return 'Document(id: $id, title: $title, content: $content, ownerId: $ownerId, createdAt: $createdAt)';
+    return 'Doc(id: $id, title: $title, content: $content, ownerId: $ownerId, createdAt: $createdAt)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DocumentImpl &&
+            other is _$DocImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             const DeepCollectionEquality().equals(other._content, _content) &&
@@ -209,27 +203,26 @@ class _$DocumentImpl implements _Document {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$DocumentImplCopyWith<_$DocumentImpl> get copyWith =>
-      __$$DocumentImplCopyWithImpl<_$DocumentImpl>(this, _$identity);
+  _$$DocImplCopyWith<_$DocImpl> get copyWith =>
+      __$$DocImplCopyWithImpl<_$DocImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$DocumentImplToJson(
+    return _$$DocImplToJson(
       this,
     );
   }
 }
 
-abstract class _Document implements Document {
-  const factory _Document(
+abstract class _Doc implements Doc {
+  const factory _Doc(
       {@JsonKey(name: '_id') final String? id,
       final String? title,
       final List<dynamic>? content,
       final String? ownerId,
-      required final int createdAt}) = _$DocumentImpl;
+      required final int createdAt}) = _$DocImpl;
 
-  factory _Document.fromJson(Map<String, dynamic> json) =
-      _$DocumentImpl.fromJson;
+  factory _Doc.fromJson(Map<String, dynamic> json) = _$DocImpl.fromJson;
 
   @override
   @JsonKey(name: '_id')
@@ -244,6 +237,6 @@ abstract class _Document implements Document {
   int get createdAt;
   @override
   @JsonKey(ignore: true)
-  _$$DocumentImplCopyWith<_$DocumentImpl> get copyWith =>
+  _$$DocImplCopyWith<_$DocImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

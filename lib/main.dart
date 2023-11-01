@@ -31,17 +31,20 @@ class _MyAppState extends ConsumerState<MyApp> {
   Widget build(BuildContext context) {
     final user = ref.watch(userProvider);
 
-    return MaterialApp.router(
-      title: 'Doks',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(useMaterial3: true),
-      scaffoldMessengerKey: scaffoldMessengerKey,
-      routerDelegate: RoutemasterDelegate(
-        routesBuilder: (_) => user != null && user.token != null
-            ? loggedInRoutes
-            : loggedOutRoutes,
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: MaterialApp.router(
+        title: 'Doks',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(useMaterial3: true),
+        scaffoldMessengerKey: scaffoldMessengerKey,
+        routerDelegate: RoutemasterDelegate(
+          routesBuilder: (_) => user != null && user.token != null
+              ? loggedInRoutes
+              : loggedOutRoutes,
+        ),
+        routeInformationParser: const RoutemasterParser(),
       ),
-      routeInformationParser: const RoutemasterParser(),
     );
   }
 }

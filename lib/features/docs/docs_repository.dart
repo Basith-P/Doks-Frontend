@@ -10,7 +10,7 @@ class DocsRepository {
 
   final Dio _dio;
 
-  Future<List<Document>> getDocs({required String token}) async {
+  Future<List<Doc>> getDocs({required String token}) async {
     try {
       final res = await _dio.get(
         Endpoints.documents,
@@ -21,7 +21,7 @@ class DocsRepository {
         case 200:
           debugPrint(res.data.toString());
           final data = res.data as List<dynamic>;
-          final docs = data.map((e) => Document.fromJson(e)).toList();
+          final docs = data.map((e) => Doc.fromJson(e)).toList();
           return docs;
         default:
           showSnackBar('Something went wrong');
@@ -32,15 +32,11 @@ class DocsRepository {
     return [];
   }
 
-  Future<Document?> createDoc({
-    // required Document doc,
-    required String token,
-  }) async {
+  Future<Doc?> createDoc({required String token}) async {
     try {
       final res = await _dio.post(
         Endpoints.documents,
-        data:
-            Document(createdAt: DateTime.now().millisecondsSinceEpoch).toJson(),
+        data: Doc(createdAt: DateTime.now().millisecondsSinceEpoch).toJson(),
         options: Options(headers: {Strings.xAuthToken: token}),
       );
       debugPrint(res.data.toString());
@@ -48,13 +44,32 @@ class DocsRepository {
       switch (res.statusCode) {
         case 200:
           showSnackBar('Document created');
-          return Document.fromJson(res.data);
+          return Doc.fromJson(res.data);
         case 401:
           showSnackBar('Unauthorized');
           break;
         default:
           showSnackBar('Something went wrong');
       }
+    } catch (error) {
+      debugPrint(error.toString());
+    }
+    return null;
+  }
+
+  Future<Doc?> updateDoc({
+    required String token,
+    required Doc doc,
+  }) async {
+    try {
+      debugPrint("DATA: ${doc.toJson()}");
+      final res = await _dio.put(
+        '${Endpoints.documents}/${doc.id}${Endpoints.documentsTitle}',
+        data: doc.toJson(),
+        options: Options(headers: {Strings.xAuthToken: token}),
+      );
+      debugPrint(res.data.toString());
+      return Doc.fromJson(res.data);
     } catch (error) {
       debugPrint(error.toString());
     }

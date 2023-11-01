@@ -4,15 +4,14 @@ part 'document.freezed.dart';
 part 'document.g.dart';
 
 @freezed
-class Document with _$Document {
-  const factory Document({
+class Doc with _$Doc {
+  const factory Doc({
     @JsonKey(name: '_id') String? id,
     @Default('Untitled') String? title,
     List? content,
     String? ownerId,
     required int createdAt,
-  }) = _Document;
+  }) = _Doc;
 
-  factory Document.fromJson(Map<String, dynamic> json) =>
-      _$DocumentFromJson(json);
+  factory Doc.fromJson(Map<String, dynamic> json) => _$DocFromJson(json);
 }

@@ -3,4 +3,5 @@ class Endpoints {
   static const user = '/auth/user';
 
   static const documents = '/documents';
+  static const documentsTitle = '/title';
 }
