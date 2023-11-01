@@ -2,6 +2,7 @@ import 'package:doks/config/theme/colors.dart';
 import 'package:doks/features/auth/providers.dart';
 import 'package:doks/features/docs/models/document.dart';
 import 'package:doks/features/docs/providers.dart';
+import 'package:doks/features/realtime_collab/socket_repository.dart';
 import 'package:doks/utils/loaders.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
@@ -20,9 +21,12 @@ class _DocPageState extends ConsumerState<DocPage> {
   late TextEditingController _titleController;
   late QuillController _quillController;
 
+  final SocketRepository _socketRepository = SocketRepository();
+
   @override
   void initState() {
     super.initState();
+    _socketRepository.joinRoom(widget.id);
     _titleController = TextEditingController(text: 'Untitled');
     _quillController = QuillController.basic();
   }
