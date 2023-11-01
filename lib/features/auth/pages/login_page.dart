@@ -2,18 +2,17 @@ import 'package:doks/config/theme/colors.dart';
 import 'package:doks/features/auth/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:routemaster/routemaster.dart';
 
 class LoginPage extends ConsumerWidget {
   const LoginPage({super.key});
 
   void signIn(WidgetRef ref, BuildContext context) async {
-    final navigator = Routemaster.of(context);
+    // final navigator = Routemaster.of(context);
     final user = await ref.read(authRepositoryProvider).signInWithGoogle();
     if (user != null) {
       debugPrint('USER: ${user.name}');
       ref.read(userProvider.notifier).state = user;
-      navigator.replace('/');
+      // navigator.replace('/');
     } else {
       debugPrint('User is null');
     }
