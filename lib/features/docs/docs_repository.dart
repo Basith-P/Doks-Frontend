@@ -10,23 +10,27 @@ class DocsRepository {
 
   final Dio _dio;
 
-  // Future<List<dynamic>> getDocs() async {
-  //   try {
-  //     final res = await _dio.get(Endpoints.documents);
-  //     debugPrint(res.data.toString());
+  Future<List<Document>> getDocs({required String token}) async {
+    try {
+      final res = await _dio.get(
+        Endpoints.documents,
+        options: Options(headers: {Strings.xAuthToken: token}),
+      );
 
-  //     switch (res.statusCode) {
-  //       case 200:
-  //         List<dynamic> docs = res.data;
-  //       // docs.map((e) => Doc)
-  //       default:
-  //         showSnackBar('Something went wrong');
-  //     }
-  //   } catch (error) {
-  //     debugPrint(error.toString());
-  //   }
-  //   return [];
-  // }
+      switch (res.statusCode) {
+        case 200:
+          debugPrint(res.data.toString());
+          final data = res.data as List<dynamic>;
+          final docs = data.map((e) => Document.fromJson(e)).toList();
+          return docs;
+        default:
+          showSnackBar('Something went wrong');
+      }
+    } catch (error) {
+      debugPrint('Error: $error');
+    }
+    return [];
+  }
 
   Future<Document?> createDoc({
     // required Document doc,
