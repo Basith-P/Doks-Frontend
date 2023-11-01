@@ -57,6 +57,33 @@ class DocsRepository {
     return null;
   }
 
+  Future<Doc> getDoc({required String token, required String id}) async {
+    try {
+      final res = await _dio.get(
+        '${Endpoints.documents}/$id',
+        options: Options(headers: {Strings.xAuthToken: token}),
+      );
+      debugPrint(res.data.toString());
+
+      switch (res.statusCode) {
+        case 200:
+          return Doc.fromJson(res.data);
+        case 401:
+          showSnackBar('Unauthorized');
+          break;
+        case 404:
+          showSnackBar('Document not found');
+          throw Exception('Document not found');
+        default:
+          showSnackBar('Something went wrong');
+      }
+    } catch (error) {
+      debugPrint(error.toString());
+      throw Exception('There was an error fetching the document');
+    }
+    throw Exception('There was an error fetching the document');
+  }
+
   Future<Doc?> updateDoc({
     required String token,
     required Doc doc,

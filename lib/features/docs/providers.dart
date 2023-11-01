@@ -13,3 +13,10 @@ final getDocsProvider = FutureProvider<List<Doc>>((ref) async {
       .getDocs(token: ref.read(userProvider)!.token!);
   return docs;
 });
+
+final getDocProvider = FutureProvider.family<Doc, String>((ref, id) async {
+  final doc = await ref
+      .read(docsRepositoryProvider)
+      .getDoc(token: ref.read(userProvider)!.token!, id: id);
+  return doc;
+});
