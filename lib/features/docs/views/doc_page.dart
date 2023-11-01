@@ -1,5 +1,6 @@
 import 'package:doks/config/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class DocPage extends ConsumerStatefulWidget {
@@ -13,11 +14,13 @@ class DocPage extends ConsumerStatefulWidget {
 
 class _DocPageState extends ConsumerState<DocPage> {
   late TextEditingController _titleController;
+  late QuillController _quillController;
 
   @override
   void initState() {
     super.initState();
     _titleController = TextEditingController(text: 'Untitled');
+    _quillController = QuillController.basic();
   }
 
   @override
@@ -58,12 +61,53 @@ class _DocPageState extends ConsumerState<DocPage> {
           ),
         ),
       ),
+      body: QuillProvider(
+        configurations: QuillConfigurations(
+          controller: _quillController,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              const QuillToolbar(),
+              const SizedBox(height: 16),
+              Expanded(
+                child: Center(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: AppColors.white,
+                      borderRadius: BorderRadius.circular(4),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: AppColors.lightGray,
+                          blurRadius: 12,
+                        ),
+                      ],
+                    ),
+                    height: double.infinity,
+                    constraints: const BoxConstraints(maxWidth: 800),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: QuillEditor.basic(
+                        configurations: const QuillEditorConfigurations(
+                          readOnly: false,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 
   @override
   void dispose() {
     _titleController.dispose();
+    _quillController.dispose();
     super.dispose();
   }
 }
